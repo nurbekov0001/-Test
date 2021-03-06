@@ -4,6 +4,7 @@
 <center>
     <h1>Гостевая книга. </h1>
 </center>
+
     <form action="{% url "book_add" %}" method="post">
         {% include "book_forms.html" with button_text="Создать запись в книге" %}
     </form>
