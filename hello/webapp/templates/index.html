@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>Товар list</h1>
+    {% for book in books %}
+            <p><a href="{% url "product_view" book.id %}"> Название: {{ book.name }}</a><br/>
+            Категория: {{ book.category }}<br/>
+            Стоимость: {{ book.price }}
+        </p>
+        <br/>
+        <br/>
+    {% endfor %}
+{% endblock %}

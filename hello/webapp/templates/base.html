@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Все записи в гостевой книги  {% endblock title %}</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "css/navbar.css" %}">
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="menu">
+            <li><a href="{% url "book_list" %}">Все записи книги</a></li>
+                <li><a href="{% url "book_add" %}">Создать запись</a></li>
+            {% block menu %}{% endblock %}
+        </ul>
+    </nav>
+    <div class="container">
+{% block content %}{% endblock %}
+    </div>
+</body>
+</html>
