@@ -2,18 +2,19 @@ from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from webapp.models import Book, STATUS_CHOICES
-from webapp.forms import BookForm, BookDeleteForm
+from webapp.forms import BookForm
 
 
 def index_view(request):
+    form = BookForm()
     books = Book.objects.all().filter(status="active").order_by("-created_at")
-    return render(request, 'index.html', context={'books': books})
+    return render(request, 'index.html', context={'books': books, 'form': form})
 
 
 def book_create_view(request):
     if request.method == "GET":
         form = BookForm()
-        return render(request, 'book_create.html', {'stat': STATUS_CHOICES})
+        return render(request, 'book_create.html', {'stat': STATUS_CHOICES, 'form': form})
     elif request.method == "POST":
         form = BookForm(data=request.POST)
         if form.is_valid():
@@ -52,15 +53,9 @@ def book_update_view(request, pk):
 def book_delete_view(request, pk):
     book = get_object_or_404(Book, id=pk)
     if request.method == 'GET':
-        form = BookDeleteForm()
-        return render(request, 'book_delete.html', context={'book': book, 'form': form})
+        return render(request, 'book_delete.html', context={'book': book})
     elif request.method == 'POST':
-        form = BookDeleteForm(data=request.POST)
-        if form.is_valid():
-            if form.cleaned_data['name'] != book.name:
-                form.errors['name'] = ['Названия статей не совпадают']
-                return render(request, 'book_delete.html', context={'book': book, 'form': form})
-            book.delete()
-            return redirect('book_list')
-        return render(request, 'book_delete.html', context={'book': book, 'form': form})
+        book.delete()
+        return redirect('book_list')
+
 

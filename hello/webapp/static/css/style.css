@@ -17,6 +17,6 @@ body {
     box-shadow: red 0 0 3px;
     display: inline-block;
 }
-button{
-    color: black;
+.but{
+    color: black !important;
 }

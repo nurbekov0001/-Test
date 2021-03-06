@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Подтвердите удаление этой записи{% endblock %}
-{% block page_header %}Вы уверены, что хотите удалиту запись {{ book.title }}?{% endblock page_header %}
+{% block page_header %}Вы уверены, что хотите удалиту запись {{ book.title }}{% endblock page_header %}
 
 {% block content%}
     <form action="{% url "book_delete" book.id %}", method="POST">
         {% include 'book_forms.html' with button_text="Да, я хочу удалить этоту запись" %}
-   <button><a href="{% url "book_list"%}">Отмена. Код красный. КОД КРАСНЫЙ!!</a></button>
-
+         <button><a class="but"  href="{% url "book_list"%}">Нет, я нехочу удалять эту запись </a></button>
     </form>
+
 {% endblock content %}

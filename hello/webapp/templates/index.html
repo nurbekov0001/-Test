@@ -4,20 +4,20 @@
 <center>
     <h1>Гостевая книга. </h1>
 </center>
+    <form action="{% url "book_add" %}" method="post">
+        {% include "book_forms.html" with button_text="Создать запись в книге" %}
+    </form>
 
     {% for book in books %}
         <div class="panel">
-        <p class="title"> {{ book.name }}       (   {{ book.email}}  ) &emsp;
+        <p class="title"> {{ book.name }}   ( {{ book.email}} ) &emsp;&emsp;
 
-{#            <link rel="stylesheet" href="{% static "css/navbar.css" %}">#}
              <button><a href="{% url "book_delete" book.id %}"> <img src="{% static "img/delete.png" %}" width="15" height="15" alt="delete"
           style="vertical-align: middle"></a> </button>
               <button><a href="{% url "book_update" book.id %}"> <img src="{% static "img/update.png" %}" width="15" height="15" alt="update"
           style="vertical-align: middle"></a>  </button>
 
 
-{#        <a href="{% url "book_delete" book.id %}">delete </a>&emsp;#}
-{#            <a href="{% url "book_update" book.id %}">upp</a>#}
         </p>
            <p> {{ book.description }}</p>
         </div>
