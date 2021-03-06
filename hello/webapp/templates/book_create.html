@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block page_header %}Добавить запись в книге{% endblock page_header %}
+
+{% block content %}
+    <form action="/book/add/" method="post">
+        {% include "book_forms.html" with button_text="Создать запись в книге" %}
+    </form>
+{% endblock content %}

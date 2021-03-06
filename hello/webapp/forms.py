@@ -5,7 +5,7 @@ from webapp.models import Book
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
-        fields = ('name', 'email', 'description', 'status', 'created_at', 'updated_at')
+        fields = ('name', 'email', 'description', 'status')
 
 
 class BookDeleteForm(forms.Form):

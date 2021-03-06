@@ -6,7 +6,7 @@ from webapp.forms import BookForm, BookDeleteForm
 
 
 def index_view(request):
-    books = Book.objects.all().filter(status="active")
+    books = Book.objects.all().filter(status="active").order_by("created_at")
     return render(request, 'index.html', context={'books': books})
 
 
@@ -18,7 +18,7 @@ def book_view(request, pk):
 def book_create_view(request):
     if request.method == "GET":
         form = BookForm()
-        return render(request, 'product_create.html', {'stat': STATUS_CHOICES})
+        return render(request, 'book_create.html', {'stat': STATUS_CHOICES})
     elif request.method == "POST":
         form = BookForm(data=request.POST)
         if form.is_valid():
