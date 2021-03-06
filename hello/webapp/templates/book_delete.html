@@ -6,6 +6,7 @@
 {% block content%}
     <form action="{% url "book_delete" book.id %}", method="POST">
         {% include 'book_forms.html' with button_text="Да, я хочу удалить этоту запись" %}
-        <a href="{% url "book_view" book.id %}">Отмена. Код красный. КОД КРАСНЫЙ!!</a>
+   <button><a href="{% url "book_list"%}">Отмена. Код красный. КОД КРАСНЫЙ!!</a></button>
+
     </form>
 {% endblock content %}

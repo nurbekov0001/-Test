@@ -6,13 +6,8 @@ from webapp.forms import BookForm, BookDeleteForm
 
 
 def index_view(request):
-    books = Book.objects.all().filter(status="active").order_by("created_at")
+    books = Book.objects.all().filter(status="active").order_by("-created_at")
     return render(request, 'index.html', context={'books': books})
-
-
-def book_view(request, pk):
-    book = get_object_or_404(Book, id=pk)
-    return render(request, 'book_view.html', context={'book': book})
 
 
 def book_create_view(request):
@@ -26,10 +21,9 @@ def book_create_view(request):
                 name=form.cleaned_data.get("name"),
                 email=form.cleaned_data.get("email"),
                 description=form.cleaned_data.get("description"),
-                status=form.cleaned_data.get("status"),
             )
 
-            return redirect('book_view', pk=book.id)
+            return redirect('book_list')
         return render(request, 'book_create.html', context={'form': form})
 
 
@@ -42,7 +36,6 @@ def book_update_view(request, pk):
             'name': book.name,
             'email': book.email,
             'description': book.description,
-            'status': book.status,
         })
         return render(request, 'book_update.html', context={'form': form, 'book': book})
     elif request.method == 'POST':
@@ -51,15 +44,13 @@ def book_update_view(request, pk):
             book.name = form.cleaned_data.get("name")
             book.email = form.cleaned_data.get("email")
             book.description = form.cleaned_data.get("description")
-            book.status = form.cleaned_data.get("status")
             book.save()
-            return redirect('book_view', pk=book.id)
+            return redirect('book_list')
         return render(request, 'book_update.html', context={'form': form, 'book': book})
 
 
 def book_delete_view(request, pk):
     book = get_object_or_404(Book, id=pk)
-
     if request.method == 'GET':
         form = BookDeleteForm()
         return render(request, 'book_delete.html', context={'book': book, 'form': form})
@@ -73,4 +64,3 @@ def book_delete_view(request, pk):
             return redirect('book_list')
         return render(request, 'book_delete.html', context={'book': book, 'form': form})
 
-# Create your views here.

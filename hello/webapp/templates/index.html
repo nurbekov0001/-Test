@@ -1,16 +1,27 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-
+<center>
     <h1>Гостевая книга. </h1>
+</center>
+
     {% for book in books %}
-        <div>
-        <p>{{ book.name }}({{ book.email}})
-        <a href="{% url "book_delete" book.id %}">delete </a>
-            <a href="{% url "book_update" book.id %}">upp</a>
+        <div class="panel">
+        <p class="title"> {{ book.name }}       (   {{ book.email}}  ) &emsp;
+
+{#            <link rel="stylesheet" href="{% static "css/navbar.css" %}">#}
+             <button><a href="{% url "book_delete" book.id %}"> <img src="{% static "img/delete.png" %}" width="15" height="15" alt="delete"
+          style="vertical-align: middle"></a> </button>
+              <button><a href="{% url "book_update" book.id %}"> <img src="{% static "img/update.png" %}" width="15" height="15" alt="update"
+          style="vertical-align: middle"></a>  </button>
+
+
+{#        <a href="{% url "book_delete" book.id %}">delete </a>&emsp;#}
+{#            <a href="{% url "book_update" book.id %}">upp</a>#}
         </p>
            <p> {{ book.description }}</p>
         </div>
-        <br/>
+
         <br/>
     {% endfor %}
 {% endblock %}

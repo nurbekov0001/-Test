@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block menu %}<li><a href="{% url "book_view" book.id %}">Вернуться к записям </a></li>{% endblock menu %}
+{% block menu %}<li><a href="{% url "book_list"%}">Вернуться к записям </a></li>{% endblock menu %}
 {% block page_header %}Редактирвоать запись в гостевой книге  {{ book.id }}{% endblock page_header %}
 
 {% block content %}
     <form action="{% url "book_update" book.id %}" method="post">
-        {% include "book_form.html" with button_text="Редактировать товар" %}
+        {% include "book_forms.html" with button_text="Сохранить" %}
     </form>
 {% endblock content %}

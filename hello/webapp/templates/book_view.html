@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-
-{% block page_header %}Добавить запись{% endblock page_header %}
-
-{% block content %}
-    <form action="/book/add/" method="post">
-        {% include "book_form.html" with button_text="Создать запись" %}
-    </form>
-{% endblock content %}
